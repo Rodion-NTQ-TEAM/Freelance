@@ -1,0 +1,24 @@
+.admin-container { padding: 24px 0; }
+.admin-card { background: #fff; border: 1px solid #eee; border-radius: 16px; padding: 20px; box-shadow: var(--shadow); margin: 16px 0; }
+.admin-form { display: grid; margin: auto; padding: 20px 0 30px; gap: 12px; max-width: 680px; }
+.admin-form label { display: grid; gap: 6px; }
+.admin-panel { margin-top: 12px; }
+.admin-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.admin-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.admin-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
+.admin-card-item { background: #fff; border: 1px solid #eee; border-radius: 14px; padding: 14px; box-shadow: var(--shadow); display: grid; gap: 8px; }
+.admin-card-item .actions { display: flex; gap: 8px; }
+.admin-dialog { width: min(760px, 92%); border: none; border-radius: 16px; padding: 0; }
+.admin-dialog::backdrop { background: rgba(0,0,0,0.4); }
+.form-row { display: flex; gap: 8px; justify-content: flex-end; margin-top: 8px; }
+
+@media (max-width: 900px) {
+  .admin-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .admin-grid { grid-template-columns: 1fr; }
+}
+
+
+
+

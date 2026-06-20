@@ -1,0 +1,167 @@
+.project-title { font-size: 48px; margin: 24px 0; }
+
+.project-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 24px; align-items: start; }
+.project-left, .project-right { background: #fff; border-radius: 16px; padding: 20px; box-shadow: var(--shadow); }
+
+.metro-line { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; background: #e8eaf6; color: var(--color-primary); font-weight: 600; }
+.metro-icon { font-size: 18px; }
+
+.features { margin: 18px 0; padding-left: 0; list-style: none; display: grid; gap: 10px; }
+.features li { position: relative; padding-left: 28px; }
+.features li::before { content: '✓'; position: absolute; left: 0; top: 0; width: 20px; height: 20px; border-radius: 50%; background: #e8f5e9; color: var(--color-accent-2); display: inline-flex; align-items: center; justify-content: center; font-weight: 800; }
+
+.specs { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+.spec-item { border: 1px solid #eee; border-radius: 14px; padding: 12px; background: #fafafa; }
+.spec-label { display: block; font-size: 12px; color: var(--color-muted); margin-bottom: 4px; }
+.spec-value { font-weight: 800; font-size: 18px; }
+
+/* Slider */
+.slider { position: relative; border-radius: 16px; overflow: hidden; }
+.slides { position: relative; height: 320px; background: #eceff1; }
+.slide { position: absolute; inset: 0; object-fit: cover; width: 100%; height: 100%; opacity: 0; transition: opacity .4s ease; cursor: zoom-in; }
+.slide.active { opacity: 1; }
+.slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.4); color: #fff; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; }
+.slider-btn.prev { left: 10px; }
+.slider-btn.next { right: 10px; }
+
+.badges { display: flex; gap: 12px; margin-top: 12px; }
+.badge.circle { width: 110px; height: 110px; border-radius: 50%; background: #fff3e0; color: #e65100; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; box-shadow: var(--shadow); }
+.badge.rect { padding: 10px 16px; border-radius: 12px; background: #e8f5e9; color: var(--color-accent-2); font-weight: 800; box-shadow: var(--shadow); }
+
+.project-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 12px; }
+.stat { text-align: center; padding: 12px; background: #fafafa; border: 1px solid #eee; border-radius: 12px; font-weight: 800; }
+
+/* Apartments Section */
+.apartments-section {
+  margin-top: 48px;
+}
+
+.apartments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.apartment-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.apartment-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.apartment-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.apartment-info {
+  padding: 20px;
+}
+
+.apartment-type {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+
+.apartment-area {
+  color: var(--color-muted);
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.apartment-details {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.apartment-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+}
+
+.apartment-detail:last-child {
+  border-bottom: none;
+}
+
+.apartment-detail-label {
+  color: var(--color-muted);
+}
+
+.apartment-detail-value {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.apartment-price {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+
+.apartment-mortgage {
+  color: var(--color-muted);
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.payment-options {
+  margin-bottom: 16px;
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.payment-option input[type="radio"] {
+  margin: 0;
+}
+
+.payment-option.highlighted {
+  background: #fff3e0;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--color-accent);
+}
+
+.discount-badge {
+  background: #ff5722;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+@media (max-width: 992px) {
+  .project-grid { grid-template-columns: 1fr; }
+  .slides { height: 260px; }
+  .project-title { font-size: 36px; }
+  .apartments-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .apartments-grid { grid-template-columns: 1fr; }
+}
+
+
