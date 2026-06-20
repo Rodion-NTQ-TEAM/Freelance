@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Админ — ЖК</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css?ver=07" />
+  <link rel="stylesheet" href="styles/admin.css?ver=07" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Холод недвижимость — Админ</a>
+    </div>
+  </header>
+
+  <main class="container admin-container">
+    <section id="login-section" class="admin-card">
+      <h1>Вход администратора</h1>
+      <form id="login-form" class="admin-form">
+        <label>Логин<input id="admin-user" type="text" placeholder="admin" required></label>
+        <label>Пароль<input id="admin-pass" type="password" placeholder="admin123" required></label>
+        <button class="btn btn-accent" type="submit">Войти</button>
+        <div id="login-msg" class="m-result" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <section id="panel-section" class="admin-panel" hidden>
+      <div class="admin-toolbar">
+        <h2>Админ-панель</h2>
+        <div class="admin-actions">
+        <button id="add-project" class="btn btn-accent" type="button">Добавить ЖК</button>
+        <button id="clear-projects" class="btn" type="button">Удалить все ЖК</button>
+          <button id="seed-demo" class="btn" type="button">Загрузить текущие ЖК</button>
+          <button id="export-json" class="btn" type="button">Экспорт JSON</button>
+          <label class="btn">
+            Импорт JSON
+            <input id="import-json" type="file" accept="application/json" hidden>
+          </label>
+          <a class="btn" href="catalog.html" target="_blank">Открыть каталог</a>
+        </div>
+      </div>
+
+      <details open class="admin-card">
+        <summary><b>Проекты (ЖК)</b></summary>
+        <div class="admin-grid" id="projects-list"></div>
+      </details>
+
+      <details class="admin-card">
+        <summary><b>Квартиры</b></summary>
+        <div class="admin-actions" style="margin:8px 0;">
+          <button id="add-apartment" class="btn btn-accent" type="button">Добавить квартиру</button>
+          <a class="btn" href="apartments.html" target="_blank">Открыть список квартир</a>
+        </div>
+        <div id="apartments-list" class="admin-grid"></div>
+      </details>
+
+      <details class="admin-card">
+        <summary><b>Новости</b></summary>
+        <div class="admin-actions" style="margin:8px 0;">
+          <button id="add-news" class="btn btn-accent" type="button">Добавить новость</button>
+          <a class="btn" href="index.html#news" target="_blank">Открыть новости</a>
+        </div>
+        <div id="news-list-admin" class="admin-grid"></div>
+      </details>
+
+      <dialog id="project-dialog" class="admin-dialog">
+        <form method="dialog" id="project-form" class="admin-form">
+          <h3 id="dlg-title">Новый ЖК</h3>
+          <input type="hidden" id="project-id" />
+          <label>Название<input id="project-name" required></label>
+          <label>Спесификации<input id="project-specipic" type="text" placeholder="Название: описание;"></label>
+          <label>Цена (от)<input id="project-price" type="text" placeholder="12 000 000 ₽"></label>
+          <label>Метро/локация<input id="project-location" placeholder="Ⓜ Центр, 10 мин"></label>
+          <label>Срок сдачи<input id="project-deadline" placeholder="IV кв. 2026 г."></label>
+          <label>Путь к экстерьеру (через ; для нескольких)
+            <input id="project-ext" placeholder="assets/Project/ext/1.jpg; assets/Project/ext/2.jpg">
+          </label>
+          <label>Путь к интерьеру (через ;)
+            <input id="project-int" placeholder="assets/Project/int/1.jpg; ...">
+          </label>
+          <label>Путь к планировкам (через ;)
+            <input id="project-plan" placeholder="assets/Project/plan/1.jpg; ...">
+          </label>
+          <div class="form-row">
+            <button class="btn" value="cancel" type="button">Отмена</button>
+            <button class="btn btn-accent" id="save-project" value="default">Сохранить</button>
+          </div>
+        </form>
+      </dialog>
+
+      <dialog id="news-dialog" class="admin-dialog">
+        <form method="dialog" id="news-form" class="admin-form">
+          <h3>Новость</h3>
+          <input type="hidden" id="news-id" />
+          <label>Дата<input id="news-date" placeholder="2025-10-01"></label>
+          <label>Заголовок<input id="news-title"></label>
+          <label>Текст<textarea id="news-text" rows="4"></textarea></label>
+          <div class="form-row">
+            <button class="btn" value="cancel" type="button">Отмена</button>
+            <button class="btn btn-accent" id="save-news" value="default">Сохранить</button>
+          </div>
+        </form>
+      </dialog>
+
+      <dialog id="apartment-dialog" class="admin-dialog">
+        <form method="dialog" id="apartment-form" class="admin-form">
+          <h3>Квартира</h3>
+          <input type="hidden" id="apt-id" />
+          <label>Проект (ЖК)
+            <select id="apt-projectId" required></select>
+          </label>
+          <label>Тип<input id="apt-type" placeholder="Студия / 1-комн. ..."></label>
+          <label>Комнат<input id="apt-rooms" type="number" placeholder="0"></label>
+          <label>Площадь (текст)<input id="apt-area" placeholder="34.17 м²"></label>
+          <label>Площадь (число)<input id="apt-areaNumber" type="number" step="0.01" placeholder="34.17"></label>
+          <label>Цена (текст)<input id="apt-price" placeholder="12 000 000 ₽"></label>
+          <label>Цена (число)<input id="apt-priceNumber" type="number" placeholder="12000000"></label>
+          <label>Ипотека<input id="apt-mortgage" placeholder="В ипотеку: ..."></label>
+          <label>Локация<input id="apt-location" placeholder="Проект · Корпус, этаж"></label>
+          <label>Картинка<input id="apt-image" placeholder="assets/.../img.jpg"></label>
+          <label>Срок сдачи<input id="apt-deliveryDate" placeholder="IV кв. 2026 г."></label>
+          <div class="form-row">
+            <button class="btn" value="cancel" type="button">Отмена</button>
+            <button class="btn btn-accent" id="save-apartment" value="default">Сохранить</button>
+          </div>
+        </form>
+      </dialog>
+    </section>
+  </main>
+
+  <script src="scripts/admin.js"></script>
+</body>
+</html>
+
+
